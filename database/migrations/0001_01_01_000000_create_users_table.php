@@ -16,9 +16,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password_hash');
-            $table->string(('full_name'))->nullable();
+            $table->string(('full_name'))->nullable(false);
             $table->enum('role', ['admin', 'user'])->default('user');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->timestamp('deleted_at')->nullable();
+            $table->unsignedBigInteger('deleted_by')->nullable();
         });
 
     }
