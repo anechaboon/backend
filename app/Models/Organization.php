@@ -4,9 +4,9 @@ namespace App\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
-class Ticket extends Model
+class Organization extends Model
 {
-    protected $table = 'tickets';
+    protected $table = 'organizations';
     protected $primary_key = 'id';
 
     protected $fillable = [
