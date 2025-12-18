@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password_hash');
+            $table->string('email')->unique()->nullable(false);
+            $table->string('password')->nullable(false);
             $table->string(('full_name'))->nullable(false);
             $table->enum('role', ['admin', 'user'])->default('user');
             $table->timestamp('created_at')->useCurrent();
