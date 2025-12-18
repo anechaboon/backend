@@ -1,5 +1,5 @@
 <?php
-namespace App\Services\Vessel;
+namespace App\Services;
 
 use App\Repositories\Vessel\VesselRepositoryInterface;
 

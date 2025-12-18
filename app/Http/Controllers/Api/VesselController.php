@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Services\Vessel\VesselService;
+use App\Services\VesselService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

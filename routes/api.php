@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\VesselController;
 use App\Http\Controllers\Api\OrganizationController;
 
