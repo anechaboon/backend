@@ -15,25 +15,83 @@ class VesselController extends Controller
         $this->vesselService = $vesselService;
     }
 
+    // Get list of vessels
     public function index()
     {
         $vessels = $this->vesselService->getAllVessels();
-        return response()->json($vessels, Response::HTTP_OK);
+        return response()->json([
+            'data' => $vessels,
+            'message' => 'Vessels retrieved successfully',
+            'status' => true
+        
+        ], Response::HTTP_OK);
     }
 
+    // Create a new vessel
     public function store(Request $request)
     {
-        $data = $request->only(['name','email','password']);
+        $data = $request->only(['name','address','imo_number']);
+        if (empty($data['name']) || empty($data['address']) || empty($data['imo_number'])) {
+            return response()->json(['status' => false, 'message'=>'Invalid data'], Response::HTTP_BAD_REQUEST);
+        }
         $vessel = $this->vesselService->createVessel($data);
-        return response()->json($vessel, Response::HTTP_CREATED);
+        return response()->json([
+            'data' => $vessel,
+            'message' => 'Vessel created successfully',
+            'status' => true
+        
+        ], Response::HTTP_OK);
     }
 
+    // Get a specific vessel
     public function show(int $id)
     {
         $vessel = $this->vesselService->getVesselById($id);
         if (!$vessel) {
-            return response()->json(['message'=>'Not Found'], Response::HTTP_NOT_FOUND);
+            return response()->json(['status' => false, 'message'=>'Not Found'], Response::HTTP_NOT_FOUND);
         }
-        return response()->json($vessel, Response::HTTP_OK);
+        return response()->json([
+            'data' => $vessel,
+            'message' => 'Vessel retrieved successfully',
+            'status' => true
+        
+        ], Response::HTTP_OK);
     }
+
+    // Update a specific vessel
+    public function update(Request $request, int $id)
+    {
+        $data = $request->only(['name','address','imo_number']);
+        if (empty($id) || !isset($data['name']) || !isset($data['address']) || !isset($data['imo_number'])) {
+            return response()->json(['status' => false, 'message'=>'Invalid data'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $vessel = $this->vesselService->updateVessel($id, $data);
+        if (!$vessel) {
+            return response()->json(['status' => false, 'message'=>'Not Found'], Response::HTTP_NOT_FOUND);
+        }
+        return response()->json([
+            'data' => $vessel,
+            'message' => 'Vessel updated successfully',
+            'status' => true
+        
+        ], Response::HTTP_OK);
+    }
+
+    // Delete a specific vessel
+    public function destroy(int $id)
+    {
+        if (empty($id)) {
+            return response()->json(['status' => false, 'message'=>'Invalid data'], Response::HTTP_BAD_REQUEST);
+        }   
+        $deleted = $this->vesselService->deleteVessel($id);
+        if (!$deleted) {
+            return response()->json(['status' => false, 'message'=>'Not Found'], Response::HTTP_NOT_FOUND);
+        }
+        return response()->json([
+            'message' => 'Vessel deleted successfully',
+            'status' => true
+        ], Response::HTTP_OK);
+    }
+
 }

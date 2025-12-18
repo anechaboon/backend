@@ -27,4 +27,14 @@ class VesselService
         return $this->vesselRepo->create($data);
     }
 
+    public function updateVessel(int $id, array $data)
+    {
+        return $this->vesselRepo->update($id, $data);
+    }
+
+    public function deleteVessel(int $id): bool
+    {
+        return $this->vesselRepo->delete($id);
+    }
+
 }
