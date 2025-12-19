@@ -30,8 +30,8 @@ class VesselController extends Controller
     // Create a new vessel
     public function store(Request $request)
     {
-        $data = $request->only(['name','address','imo_number']);
-        if (empty($data['name']) || empty($data['address']) || empty($data['imo_number'])) {
+        $data = $request->only(['name','imo_number','type','flag']);
+        if (!isset($data['name']) || !isset($data['imo_number']) || !isset($data['type']) || !isset($data['flag'])) {
             return response()->json(['status' => false, 'message'=>'Invalid data'], Response::HTTP_BAD_REQUEST);
         }
         $vessel = $this->vesselService->createVessel($data);
@@ -61,8 +61,8 @@ class VesselController extends Controller
     // Update a specific vessel
     public function update(Request $request, int $id)
     {
-        $data = $request->only(['name','address','imo_number']);
-        if (empty($id) || !isset($data['name']) || !isset($data['address']) || !isset($data['imo_number'])) {
+        $data = $request->only(['name','imo_number','type','flag']);
+        if (empty($id) || !isset($data['name']) || !isset($data['imo_number']) || !isset($data['type']) || !isset($data['flag'])) {
             return response()->json(['status' => false, 'message'=>'Invalid data'], Response::HTTP_BAD_REQUEST);
         }
 

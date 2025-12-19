@@ -15,21 +15,27 @@ class VesselsSeeder extends Seeder
         Vessel::firstOrCreate([
             'name' => 'MV Sea Voyager',
             'imo_number' => '1234567',
-            'address' => '456 Harbor Lane, Coastal Town',
+            'type' => 'Bulk Carrier',
+            'flag' => 'Panama',
+            'status' => 'active',
             'created_by' => 1,
         ]);
 
         Vessel::firstOrCreate([
             'name' => 'FV Oceanic Trader',
             'imo_number' => '7654321',
-            'address' => '789 Bay Street, Maritime Village',
+            'type' => 'Tanker',
+            'flag' => 'Liberia',
+            'status' => 'active',
             'created_by' => 1,
         ]);
 
         Vessel::firstOrCreate([
             'name' => 'SS Marine Explorer',
             'imo_number' => '9876543',
-            'address' => '123 Ocean Drive, Port City',
+            'type' => 'Container',
+            'flag' => 'Bahamas',
+            'status' => 'active',
             'created_by' => 1,
         ]);
     }

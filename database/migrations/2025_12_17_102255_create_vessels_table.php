@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('vessels', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255)->nullable(false);
-            $table->string('address', 500)->nullable();
+            $table->string('type', 100)->nullable(false);
+            $table->string('flag', 100)->nullable(false);
+            $table->string('status', 50)->nullable(false)->default('active');
             $table->string('imo_number', 50)->nullable(false)->unique();
             $table->timestamp('created_at')->useCurrent();
             $table->unsignedBigInteger('created_by')->nullable();

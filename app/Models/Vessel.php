@@ -15,8 +15,10 @@ class Vessel extends Model
 
     protected $fillable = [
         'name',
-        'address',
         'imo_number',
+        'type',
+        'flag',
+        'status',
         'created_by',
         'updated_by',
         'deleted_by',
