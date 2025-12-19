@@ -2,94 +2,94 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Services\VesselService;
+use App\Services\ServiceLineService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class VesselController extends Controller
+class ServiceLineController extends Controller
 {
-    private VesselService $vesselService;
+    private ServiceLineService $serviceLineService;
 
-    public function __construct(VesselService $vesselService)
+    public function __construct(ServiceLineService $serviceLineService)
     {
-        $this->vesselService = $vesselService;
+        $this->serviceLineService = $serviceLineService;
     }
 
-    // Get list of vessels
+    // Get list of serviceLines
     public function index()
     {
-        $vessels = $this->vesselService->getAllVessels();
+        $serviceLines = $this->serviceLineService->getAllServiceLines();
         return response()->json([
-            'data' => $vessels,
-            'message' => 'Vessels retrieved successfully',
+            'data' => $serviceLines,
+            'message' => 'ServiceLines retrieved successfully',
             'status' => true
         
         ], Response::HTTP_OK);
     }
 
-    // Create a new vessel
+    // Create a new serviceLine
     public function store(Request $request)
     {
-        $data = $request->only(['name','imo_number','type','flag','status']);
-        if (!isset($data['name']) || !isset($data['imo_number']) || !isset($data['type']) || !isset($data['flag'])) {
+        $data = $request->only(['name','description','service_code','status']);
+        if (!isset($data['name'])) {
             return response()->json(['status' => false, 'message'=>'Invalid data'], Response::HTTP_BAD_REQUEST);
         }
-        $vessel = $this->vesselService->createVessel($data);
+        $serviceLine = $this->serviceLineService->createServiceLine($data);
         return response()->json([
-            'data' => $vessel,
-            'message' => 'Vessel created successfully',
+            'data' => $serviceLine,
+            'message' => 'ServiceLine created successfully',
             'status' => true
         
         ], Response::HTTP_OK);
     }
 
-    // Get a specific vessel
+    // Get a specific serviceLine
     public function show(int $id)
     {
-        $vessel = $this->vesselService->getVesselById($id);
-        if (!$vessel) {
+        $serviceLine = $this->serviceLineService->getServiceLineById($id);
+        if (!$serviceLine) {
             return response()->json(['status' => false, 'message'=>'Not Found'], Response::HTTP_NOT_FOUND);
         }
         return response()->json([
-            'data' => $vessel,
-            'message' => 'Vessel retrieved successfully',
+            'data' => $serviceLine,
+            'message' => 'ServiceLine retrieved successfully',
             'status' => true
         
         ], Response::HTTP_OK);
     }
 
-    // Update a specific vessel
+    // Update a specific serviceLine
     public function update(Request $request, int $id)
     {
-        $data = $request->only(['name','imo_number','type','flag','status']);
-        if (empty($id) || !isset($data['name']) || !isset($data['imo_number']) || !isset($data['type']) || !isset($data['flag'])) {
+        $data = $request->only(['name','description','service_code','status']);
+        if (empty($id) || !isset($data['name'])) {
             return response()->json(['status' => false, 'message'=>'Invalid data'], Response::HTTP_BAD_REQUEST);
         }
+        $serviceLine = $this->serviceLineService->updateServiceLine($id, $data);
 
-        $vessel = $this->vesselService->updateVessel($id, $data);
-        if (!$vessel) {
+        if (!$serviceLine) {
             return response()->json(['status' => false, 'message'=>'Not Found'], Response::HTTP_NOT_FOUND);
         }
         return response()->json([
-            'data' => $vessel,
-            'message' => 'Vessel updated successfully',
+            'data' => $serviceLine,
+            'message' => 'ServiceLine updated successfully',
             'status' => true
         
         ], Response::HTTP_OK);
     }
 
-    // Delete a specific vessel
+    // Delete a specific serviceLine
     public function destroy(int $id)
     {
         if (empty($id)) {
             return response()->json(['status' => false, 'message'=>'Invalid data'], Response::HTTP_BAD_REQUEST);
         }   
-        $deleted = $this->vesselService->deleteVessel($id);
+        $deleted = $this->serviceLineService->deleteServiceLine($id);
         if (!$deleted) {
             return response()->json(['status' => false, 'message'=>'Not Found'], Response::HTTP_NOT_FOUND);
         }
         return response()->json([
-            'message' => 'Vessel deleted successfully',
+            'message' => 'ServiceLine deleted successfully',
             'status' => true
         ], Response::HTTP_OK);
     }

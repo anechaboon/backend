@@ -15,6 +15,8 @@ class ServiceLine extends Model
     protected $fillable = [
         'name',
         'description',
+        'service_code',
+        'status',
         'created_by',
         'updated_by',
         'deleted_by',
