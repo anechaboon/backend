@@ -20,6 +20,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Vessel\VesselRepositoryInterface::class,
             \App\Repositories\Vessel\VesselRepository::class
         );
+
+        $this->app->bind(
+            \App\Repositories\Auth\AuthRepositoryInterface::class,
+            \App\Repositories\Auth\AuthRepository::class
+        );
     }
 
     /**
