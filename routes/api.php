@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\VesselController;
 use App\Http\Controllers\Api\OrganizationController;
 use App\Http\Controllers\Api\ServiceLineController;
+use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\AuthController;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -16,4 +17,5 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('vessels', VesselController::class);
     Route::apiResource('organizations', OrganizationController::class);
     Route::apiResource('service-lines', ServiceLineController::class);
+    Route::apiResource('categories', CategoryController::class);
 });

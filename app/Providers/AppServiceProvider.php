@@ -35,6 +35,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\ServiceLine\ServiceLineRepositoryInterface::class,
             \App\Repositories\ServiceLine\ServiceLineRepository::class
         );
+
+        $this->app->bind(
+            \App\Repositories\Category\CategoryRepositoryInterface::class,
+            \App\Repositories\Category\CategoryRepository::class
+        );
     }
 
     /**
