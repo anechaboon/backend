@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('organizations', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255)->nullable(false);
-            $table->string('email', 255)->nullable();
-            $table->string('phone', 20)->nullable();
-            $table->string('address', 500)->nullable();
-            $table->string('city', 100)->nullable();
-            $table->string('country', 100)->nullable();
             $table->text('description')->nullable();
+            $table->string('status', 50)->default('active');
             $table->timestamp('created_at')->useCurrent();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
@@ -34,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('organizations');
+        Schema::dropIfExists('categories');
     }
 };

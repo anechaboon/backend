@@ -4,7 +4,8 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\{ 
     OrganizationsSeeder, 
     ServiceLineSeeder,
-    VesselsSeeder
+    VesselsSeeder,
+    CategorySeeder
 };
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +15,7 @@ class DatabaseSeeder extends Seeder
             OrganizationsSeeder::class,
             ServiceLineSeeder::class,
             VesselsSeeder::class,
+            CategorySeeder::class,
         ];
     }
 

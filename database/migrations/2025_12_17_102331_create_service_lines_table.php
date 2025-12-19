@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name', 255)->nullable(false);
             $table->text('description')->nullable();
+            $table->string('service_code', 20)->nullable();
+            $table->string('status',50)->default('active');
             $table->timestamp('created_at')->useCurrent();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
