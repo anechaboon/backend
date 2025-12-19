@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('city', 100)->nullable();
             $table->string('country', 100)->nullable();
             $table->text('description')->nullable();
+            $table->string('status', 50)->nullable(false)->default('active');
             $table->timestamp('created_at')->useCurrent();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();

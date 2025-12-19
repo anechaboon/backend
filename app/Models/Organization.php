@@ -13,13 +13,13 @@ class Organization extends Model
     protected $primary_key = 'id';
 
     protected $fillable = [
-        'title',
+        'name',
+        'email',
+        'phone',
+        'address',
+        'city',
+        'country',
         'description',
-        'contact_email',
-        'priority',
-        'organization_id',
-        'vessel_id',
-        'service_line_id',
         'status',
         'created_by',
         'updated_by',

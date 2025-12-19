@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('password')->nullable(false);
             $table->string(('full_name'))->nullable(false);
             $table->enum('role', ['admin', 'user'])->default('user');
+            $table->string('status', 50)->nullable(false)->default('active');
             $table->timestamp('created_at')->useCurrent();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();

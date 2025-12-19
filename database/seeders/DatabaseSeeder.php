@@ -5,7 +5,8 @@ use Database\Seeders\{
     OrganizationsSeeder, 
     ServiceLineSeeder,
     VesselsSeeder,
-    CategorySeeder
+    CategorySeeder,
+    UserSeeder
 };
 class DatabaseSeeder extends Seeder
 {
@@ -16,6 +17,7 @@ class DatabaseSeeder extends Seeder
             ServiceLineSeeder::class,
             VesselsSeeder::class,
             CategorySeeder::class,
+            UserSeeder::class,
         ];
     }
 
