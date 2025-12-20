@@ -30,7 +30,7 @@ class TicketController extends Controller
     // Create a new ticket
     public function store(Request $request)
     {
-        $data = $request->only(['title','description','contact_email','priority', 'category_id', 'organization_id', 'vessel_id', 'service_line_id', 'assigned_to_user_id', 'status']);
+        $data = $request->only(['title','description','contact_email', 'cc_emails', 'priority', 'category_id', 'organization_id', 'vessel_id', 'service_line_id', 'assigned_to_user_id', 'status']);
         if (!isset($data['title']) || !isset($data['contact_email']) || !isset($data['priority']) || !isset($data['status'])) {
             return response()->json(['status' => false, 'message'=>'Invalid data'], Response::HTTP_BAD_REQUEST);
         }
@@ -61,7 +61,7 @@ class TicketController extends Controller
     // Update a specific ticket
     public function update(Request $request, int $id)
     {
-        $data = $request->only(['title','description','contact_email','priority', 'category_id', 'organization_id', 'vessel_id', 'service_line_id', 'assigned_to_user_id', 'status']);
+        $data = $request->only(['title','description','contact_email', 'cc_emails', 'priority', 'category_id', 'organization_id', 'vessel_id', 'service_line_id', 'assigned_to_user_id', 'status']);
         if (empty($id) || !isset($data['title']) || !isset($data['contact_email']) || !isset($data['priority']) || !isset($data['status'])) {
             return response()->json(['status' => false, 'message'=>'Invalid data'], Response::HTTP_BAD_REQUEST);
         }

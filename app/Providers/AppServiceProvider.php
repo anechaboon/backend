@@ -45,6 +45,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Ticket\TicketRepositoryInterface::class,
             \App\Repositories\Ticket\TicketRepository::class
         );
+
+        $this->app->bind(
+            \App\Repositories\TicketCCEmail\TicketCCEmailRepositoryInterface::class,
+            \App\Repositories\TicketCCEmail\TicketCCEmailRepository::class
+        );
     }
 
     /**
