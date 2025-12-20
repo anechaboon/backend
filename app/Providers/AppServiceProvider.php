@@ -40,6 +40,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Category\CategoryRepositoryInterface::class,
             \App\Repositories\Category\CategoryRepository::class
         );
+
+        $this->app->bind(
+            \App\Repositories\Ticket\TicketRepositoryInterface::class,
+            \App\Repositories\Ticket\TicketRepository::class
+        );
     }
 
     /**

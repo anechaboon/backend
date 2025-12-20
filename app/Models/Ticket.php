@@ -16,6 +16,8 @@ class Ticket extends Model
         'title',
         'description',
         'contact_email',
+        'assigned_to_user_id',
+        'category_id',
         'priority',
         'organization_id',
         'vessel_id',

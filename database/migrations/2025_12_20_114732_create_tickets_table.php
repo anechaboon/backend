@@ -17,11 +17,12 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('contact_email', 255)->nullable(false);
             $table->enum('priority', ['low', 'medium', 'high'])->default('medium');
+            $table->unsignedInteger('category_id')->nullable();
             $table->unsignedBigInteger('organization_id')->nullable();
             $table->unsignedBigInteger('vessel_id')->nullable();
             $table->unsignedBigInteger('service_line_id')->nullable();
             $table->unsignedBigInteger('assigned_to_user_id')->nullable();
-            $table->enum('status', ['open', 'in_progress', 'closed'])->default('open');
+            $table->enum('status', ['open', 'in_progress', 'resolved', 'closed'])->default('open');
             $table->timestamp('created_at')->useCurrent();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
