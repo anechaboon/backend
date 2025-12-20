@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\OrganizationController;
 use App\Http\Controllers\Api\ServiceLineController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\UserController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -18,4 +19,5 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('organizations', OrganizationController::class);
     Route::apiResource('service-lines', ServiceLineController::class);
     Route::apiResource('categories', CategoryController::class);
+    Route::apiResource('users', UserController::class);
 });

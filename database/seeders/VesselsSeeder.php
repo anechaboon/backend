@@ -13,8 +13,9 @@ class VesselsSeeder extends Seeder
     public function run(): void
     {
         Vessel::firstOrCreate([
-            'name' => 'MV Sea Voyager',
             'imo_number' => '1234567',
+        ],[
+            'name' => 'MV Sea Voyager',
             'type' => 'Bulk Carrier',
             'flag' => 'Panama',
             'status' => 'active',
@@ -22,8 +23,9 @@ class VesselsSeeder extends Seeder
         ]);
 
         Vessel::firstOrCreate([
-            'name' => 'FV Oceanic Trader',
             'imo_number' => '7654321',
+        ],[
+            'name' => 'FV Oceanic Trader',
             'type' => 'Tanker',
             'flag' => 'Liberia',
             'status' => 'active',
@@ -31,8 +33,9 @@ class VesselsSeeder extends Seeder
         ]);
 
         Vessel::firstOrCreate([
-            'name' => 'SS Marine Explorer',
             'imo_number' => '9876543',
+        ],[
+            'name' => 'SS Marine Explorer',
             'type' => 'Container',
             'flag' => 'Bahamas',
             'status' => 'active',

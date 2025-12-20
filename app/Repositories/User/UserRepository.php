@@ -10,6 +10,25 @@ class UserRepository implements UserRepositoryInterface
         return User::all()->toArray();
     }
 
+    public function search(array $params, int $perPage = 15): array
+    {
+        $query = User::query();
+
+        if (!empty($params['email'])) {
+            $query->where('email', $params['email']);
+        }
+
+        if (!empty($params['full_name'])) {
+            $query->where('full_name', 'like', '%' . $params['full_name'] . '%');
+        }
+
+        if (!empty($params['role'])) {
+            $query->where('role', $params['role']);
+        }
+
+        return $query->paginate($perPage)->toArray();
+    }
+
     public function find(int $id): ?User
     {
         return User::find($id);

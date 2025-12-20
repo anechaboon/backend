@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('organization_id')->nullable();
             $table->unsignedBigInteger('vessel_id')->nullable();
             $table->unsignedBigInteger('service_line_id')->nullable();
+            $table->unsignedBigInteger('assigned_to_user_id')->nullable();
             $table->enum('status', ['open', 'in_progress', 'closed'])->default('open');
             $table->timestamp('created_at')->useCurrent();
             $table->unsignedBigInteger('created_by')->nullable();

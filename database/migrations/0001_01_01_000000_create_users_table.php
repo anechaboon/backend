@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('email')->unique()->nullable(false);
             $table->string('password')->nullable(false);
             $table->string(('full_name'))->nullable(false);
-            $table->enum('role', ['admin', 'user'])->default('user');
+            $table->enum('role', ['admin', 'staff', 'user'])->default('user');
             $table->string('status', 50)->nullable(false)->default('active');
             $table->timestamp('created_at')->useCurrent();
             $table->unsignedBigInteger('created_by')->nullable();
