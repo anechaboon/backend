@@ -37,4 +37,9 @@ class TicketCCEmailService
         return $this->ticketCCEmailRepo->delete($id);
     }
 
+    public function deleteByTicketId(int $ticketId): bool
+    {
+        return $this->ticketCCEmailRepo->deleteByTicketId($ticketId);   
+    }
+
 }

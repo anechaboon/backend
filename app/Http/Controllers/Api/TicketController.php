@@ -16,11 +16,17 @@ class TicketController extends Controller
     }
 
     // Get list of tickets
-    public function index()
+    public function index(Request $request)
     {
-        $tickets = $this->ticketService->getAllTickets();
+        $criteria = $request->only(['status', 'organization_id', 'vessel_id', 'service_line_id']);
+        $tickets = $this->ticketService->searchTickets($criteria, $request->get('per_page', 15));
+
+        if (empty($tickets)) {
+            return response()->json(['status' => false, 'message'=>'No Tickets Found'], Response::HTTP_NOT_FOUND);
+        }
+
         return response()->json([
-            'data' => $tickets,
+            ...$tickets,
             'message' => 'Tickets retrieved successfully',
             'status' => true
         

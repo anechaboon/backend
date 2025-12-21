@@ -22,14 +22,20 @@ class TicketCCEmailRepository implements TicketCCEmailRepositoryInterface
 
     public function update(int $id, array $data): TicketCCEmail
     {
-        $user = TicketCCEmail::findOrFail($id);
-        $user->update($data);
-        return $user;
+        $ticketCCEmail = TicketCCEmail::findOrFail($id);
+        $ticketCCEmail->update($data);
+        return $ticketCCEmail;
     }
 
     public function delete(int $id): bool
     {
-        $user = TicketCCEmail::findOrFail($id);
-        return $user->delete();
+        $ticketCCEmail = TicketCCEmail::findOrFail($id);
+        return $ticketCCEmail->delete();
+    }
+
+    public function deleteByTicketId(int $ticketId): bool
+    {
+        $deleted = TicketCCEmail::where('ticket_id', $ticketId)->delete();
+        return $deleted > 0;
     }
 }
