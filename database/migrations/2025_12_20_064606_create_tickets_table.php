@@ -17,9 +17,9 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('contact_email', 255)->nullable(false);
             $table->enum('priority', ['low', 'medium', 'high', 'urgent'])->default('medium');
-            $table->unsignedInteger('category_id')->nullable();
+            $table->unsignedInteger('category_id')->nullable(false);
             $table->unsignedBigInteger('organization_id')->nullable();
-            $table->unsignedBigInteger('vessel_id')->nullable();
+            $table->unsignedBigInteger('vessel_id')->nullable(false);
             $table->unsignedBigInteger('service_line_id')->nullable();
             $table->unsignedBigInteger('assigned_to_user_id')->nullable();
             $table->enum('status', ['open', 'in_progress', 'resolved', 'closed'])->default('open');

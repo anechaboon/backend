@@ -15,7 +15,7 @@ class Ticket extends Model
     use SoftDeletes;
 
     protected $table = 'tickets';
-    protected $primary_key = 'id';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'title',

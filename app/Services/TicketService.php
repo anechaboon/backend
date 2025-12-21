@@ -38,6 +38,7 @@ class TicketService
             $res = $this->ticketRepo->create($data);
             $repoCC = new TicketCCEmailRepository();
             $serviceCC = new TicketCCEmailService($repoCC);
+            $userId = auth()->user()->id ?? null;
 
             foreach ($data['cc_emails'] as $cc_email) {
                 if (empty($cc_email)) {
@@ -46,7 +47,8 @@ class TicketService
                 $ticketCCEmailData = [
                     'ticket_id' => $res->id,
                     'cc_email' => $cc_email,
-                    'created_by' => $data['created_by'] ?? null,
+                    'created_by' => $userId,
+                    'updated_by' => $userId,
                 ];
                 $resCC = $serviceCC->createTicketCCEmail($ticketCCEmailData);
                 if (!$resCC) {
@@ -70,23 +72,33 @@ class TicketService
 
             $repoCC = new TicketCCEmailRepository();
             $serviceCC = new TicketCCEmailService($repoCC);
-            $resDelete = $serviceCC->deleteByTicketId($id);
-            if (!$resDelete) {
-                DB::rollBack();
-                throw new \Exception('Failed to delete existing Ticket CC Emails');
+            $userId = auth()->user()->id ?? null;
+            $resCheck = $serviceCC->getTicketCCEmailByTicketId($id);
+            if($resCheck){
+                $serviceCC->updateByTicketId($id, ['deleted_by' => $userId]);
+                $resDelete = $serviceCC->deleteByTicketId($id);
+                if (!$resDelete) {
+                    DB::rollBack();
+                    throw new \Exception('Failed to delete existing Ticket CC Emails');
+                }
             }
+            
             foreach ($data['cc_emails'] as $cc_email) {
+                if (empty($cc_email)) {
+                    continue;
+                }
                 $resCC = $serviceCC->createTicketCCEmail([
                     'ticket_id' => $id,
                     'cc_email' => $cc_email['cc_email'],
-                    'created_by' => $data['created_by'] ?? null,
+                    'created_by' => $userId,
+                    'updated_by' => $userId,
                 ]);
                 if (!$resCC) {
                     DB::rollBack();
                     throw new \Exception('Failed to create Ticket CC Email');
                 }
             }
-            $res = $this->ticketRepo->update($id, $data);
+            $res = $this->ticketRepo->update($id, [...$data, 'updated_by' => $userId]);
             if (!$res) {
                 DB::rollBack();
                 throw new \Exception('Failed to update Ticket');
@@ -101,7 +113,9 @@ class TicketService
 
     public function deleteTicket(int $id): bool
     {
-        return $this->ticketRepo->delete($id);
+        $userId = auth()->user()->id ?? null;
+        $this->ticketRepo->update($id, ['deleted_by' => $userId]);
+        return $this->ticketRepo->delete($id, $userId);
     }
 
 }

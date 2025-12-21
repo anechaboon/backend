@@ -11,7 +11,7 @@ class TicketCCEmail extends Model
     use SoftDeletes;
 
     protected $table = 'ticket_cc_emails';
-    protected $primary_key = 'id';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'ticket_id',

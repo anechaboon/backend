@@ -2,6 +2,7 @@
 namespace App\Repositories\TicketCCEmail;
 
 use App\Models\TicketCCEmail;
+use Ramsey\Uuid\Type\Integer;
 
 class TicketCCEmailRepository implements TicketCCEmailRepositoryInterface
 {
@@ -15,6 +16,11 @@ class TicketCCEmailRepository implements TicketCCEmailRepositoryInterface
         return TicketCCEmail::find($id);
     }
 
+    public function findByTicketId(int $ticketId): ?TicketCCEmail
+    {
+        return TicketCCEmail::where('ticket_id', $ticketId)->first();
+    }
+
     public function create(array $data): TicketCCEmail
     {
         return TicketCCEmail::create($data);
@@ -25,6 +31,13 @@ class TicketCCEmailRepository implements TicketCCEmailRepositoryInterface
         $ticketCCEmail = TicketCCEmail::findOrFail($id);
         $ticketCCEmail->update($data);
         return $ticketCCEmail;
+    }
+
+    public function updateByTicketId(int $ticketId, array $data): bool
+    {
+        $ticketCCEmail = TicketCCEmail::where('ticket_id', $ticketId)
+            ->update($data);
+        return $ticketCCEmail > 0;
     }
 
     public function delete(int $id): bool

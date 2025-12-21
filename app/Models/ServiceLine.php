@@ -10,7 +10,7 @@ class ServiceLine extends Model
     use SoftDeletes;
     
     protected $table = 'service_lines';
-    protected $primary_key = 'id';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'name',

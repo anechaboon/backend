@@ -13,13 +13,13 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
-});
 
-Route::prefix('v1')->group(function () {
-    Route::apiResource('tickets', TicketController::class);
-    Route::apiResource('vessels', VesselController::class);
-    Route::apiResource('organizations', OrganizationController::class);
-    Route::apiResource('service-lines', ServiceLineController::class);
-    Route::apiResource('categories', CategoryController::class);
-    Route::apiResource('users', UserController::class);
+    Route::prefix('v1')->group(function () {
+        Route::apiResource('tickets', TicketController::class);
+        Route::apiResource('vessels', VesselController::class);
+        Route::apiResource('organizations', OrganizationController::class);
+        Route::apiResource('service-lines', ServiceLineController::class);
+        Route::apiResource('categories', CategoryController::class);
+        Route::apiResource('users', UserController::class);
+    });
 });

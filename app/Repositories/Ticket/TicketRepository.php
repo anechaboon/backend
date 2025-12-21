@@ -59,7 +59,7 @@ class TicketRepository implements TicketRepositoryInterface
         return $user;
     }
 
-    public function delete(int $id): bool
+    public function delete(int $id, ?int $userId = null): bool
     {
         $user = Ticket::findOrFail($id);
         return $user->delete();

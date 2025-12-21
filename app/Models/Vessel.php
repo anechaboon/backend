@@ -11,7 +11,7 @@ class Vessel extends Model
     use SoftDeletes;
 
     protected $table = 'vessels';
-    protected $primary_key = 'id';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'name',

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Services\TicketService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Helper\Helper;
 
 class TicketController extends Controller
 {
@@ -20,7 +21,6 @@ class TicketController extends Controller
     {
         $criteria = $request->only(['status', 'organization_id', 'vessel_id', 'service_line_id']);
         $tickets = $this->ticketService->searchTickets($criteria, $request->get('per_page', 15));
-
         if (empty($tickets)) {
             return response()->json(['status' => false, 'message'=>'No Tickets Found'], Response::HTTP_NOT_FOUND);
         }
@@ -36,10 +36,16 @@ class TicketController extends Controller
     // Create a new ticket
     public function store(Request $request)
     {
+        $helper = new Helper();
         $data = $request->only(['title','description','contact_email', 'cc_emails', 'priority', 'category_id', 'organization_id', 'vessel_id', 'service_line_id', 'assigned_to_user_id', 'status']);
         if (!isset($data['title']) || !isset($data['contact_email']) || !isset($data['priority']) || !isset($data['status'])) {
+            if (!$helper->validEmailFromPayload($data)) {
+                return response()->json(['status' => false, 'message'=>'Invalid email format'], Response::HTTP_BAD_REQUEST);
+            }
+
             return response()->json(['status' => false, 'message'=>'Invalid data'], Response::HTTP_BAD_REQUEST);
         }
+
         $ticket = $this->ticketService->createTicket($data);
         return response()->json([
             'data' => $ticket,
@@ -69,6 +75,9 @@ class TicketController extends Controller
     {
         $data = $request->only(['title','description','contact_email', 'cc_emails', 'priority', 'category_id', 'organization_id', 'vessel_id', 'service_line_id', 'assigned_to_user_id', 'status']);
         if (empty($id) || !isset($data['title']) || !isset($data['contact_email']) || !isset($data['priority']) || !isset($data['status'])) {
+            if (!$helper->validEmailFromPayload($data)) {
+                return response()->json(['status' => false, 'message'=>'Invalid email format'], Response::HTTP_BAD_REQUEST);
+            }
             return response()->json(['status' => false, 'message'=>'Invalid data'], Response::HTTP_BAD_REQUEST);
         }
 

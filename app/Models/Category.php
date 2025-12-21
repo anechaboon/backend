@@ -10,7 +10,7 @@ class Category extends Model
     use SoftDeletes;
     
     protected $table = 'categories';
-    protected $primary_key = 'id';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'name',

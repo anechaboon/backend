@@ -2,7 +2,7 @@
 namespace App\Services;
 
 use App\Repositories\TicketCCEmail\TicketCCEmailRepositoryInterface;
-
+use App\Models\TicketCCEmail;
 class TicketCCEmailService
 {
     private TicketCCEmailRepositoryInterface $ticketCCEmailRepo;
@@ -22,6 +22,11 @@ class TicketCCEmailService
         return $this->ticketCCEmailRepo->find($id);
     }
 
+    public function getTicketCCEmailByTicketId(int $ticketId): ?TicketCCEmail
+    {
+        return $this->ticketCCEmailRepo->findByTicketId($ticketId);
+    }
+
     public function createTicketCCEmail(array $data)
     {
         return $this->ticketCCEmailRepo->create($data);
@@ -30,6 +35,11 @@ class TicketCCEmailService
     public function updateTicketCCEmail(int $id, array $data)
     {
         return $this->ticketCCEmailRepo->update($id, $data);
+    }
+
+    public function updateByTicketId(int $ticketId, array $data): bool
+    {
+        return $this->ticketCCEmailRepo->updateByTicketId($ticketId, $data);
     }
 
     public function deleteTicketCCEmail(int $id): bool
