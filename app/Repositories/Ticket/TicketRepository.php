@@ -41,7 +41,7 @@ class TicketRepository implements TicketRepositoryInterface
         return Ticket::select([
             'tickets.*',
             'users.full_name as assigned_to_user_name'
-        ])->join('users', 'tickets.assigned_to_user_id', '=', 'users.id')
+        ])->leftJoin('users', 'tickets.assigned_to_user_id', '=', 'users.id')
         ->with('organization', 'vessel', 'serviceLine','category','ccEmails')
         ->find($id);
         

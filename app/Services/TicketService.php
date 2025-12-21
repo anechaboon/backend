@@ -40,6 +40,9 @@ class TicketService
             $serviceCC = new TicketCCEmailService($repoCC);
 
             foreach ($data['cc_emails'] as $cc_email) {
+                if (empty($cc_email)) {
+                    continue;
+                }
                 $ticketCCEmailData = [
                     'ticket_id' => $res->id,
                     'cc_email' => $cc_email,

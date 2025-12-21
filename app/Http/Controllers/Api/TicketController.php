@@ -54,7 +54,7 @@ class TicketController extends Controller
     {
         $ticket = $this->ticketService->getTicketById($id);
         if (!$ticket) {
-            return response()->json(['status' => false, 'message'=>'Not Found'], Response::HTTP_NOT_FOUND);
+            return response()->json(['status' => false, 'message'=>'Not Found Ticket'], Response::HTTP_NOT_FOUND);
         }
         return response()->json([
             'data' => $ticket,

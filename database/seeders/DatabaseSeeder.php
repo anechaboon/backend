@@ -6,7 +6,8 @@ use Database\Seeders\{
     ServiceLineSeeder,
     VesselsSeeder,
     CategorySeeder,
-    UserSeeder
+    UserSeeder,
+    TicketsSeeder
 };
 class DatabaseSeeder extends Seeder
 {
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder
             VesselsSeeder::class,
             CategorySeeder::class,
             UserSeeder::class,
+            TicketsSeeder::class
         ];
     }
 
