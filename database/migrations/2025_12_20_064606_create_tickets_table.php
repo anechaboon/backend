@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title', 255)->nullable(false);
             $table->text('description')->nullable();
             $table->string('contact_email', 255)->nullable(false);
-            $table->enum('priority', ['low', 'medium', 'high', 'urgent'])->default('medium');
+            $table->enum('priority', ['low', 'medium', 'high'])->default('medium');
             $table->unsignedInteger('category_id')->nullable(false);
             $table->unsignedBigInteger('organization_id')->nullable();
             $table->unsignedBigInteger('vessel_id')->nullable(false);

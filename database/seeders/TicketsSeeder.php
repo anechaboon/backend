@@ -31,7 +31,7 @@ class TicketsSeeder extends Seeder
             ], [
                 'description' => "This is a sample description for ticket $i.",
                 'contact_email' => "contact$i@example.com",
-                'priority' => ['low', 'medium', 'high', 'urgent'][array_rand(['low', 'medium', 'high', 'urgent'])],
+                'priority' => ['low', 'medium', 'high'][array_rand(['low', 'medium', 'high'])],
                 'category_id' => $resCategory[$indexCategory]->id,
                 'organization_id' => $resOrganization[$indexOrganization]->id,
                 'vessel_id' => $resVessel[$indexVessel]->id,
